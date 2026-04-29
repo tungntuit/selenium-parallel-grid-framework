@@ -69,7 +69,7 @@
                     </properties>
 
                     <argLine>
-                        -javaagent:C:/Users/TUNG/.m2/repository/org/aspectj/aspectjweaver/1.9.21/aspectjweaver-1.9.21.jar
+                        -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar
                     </argLine>
 
                     <systemPropertyVariables>

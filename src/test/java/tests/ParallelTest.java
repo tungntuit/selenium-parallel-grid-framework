@@ -26,14 +26,14 @@ public class ParallelTest extends BaseTest {
         System.out.println("Thread: " + Thread.currentThread().getId() + " - GitHub");
     }
 
-    @Test
-    public void testFailDemo() {
-
-        openUrl("https://google.com");
-
-        // ép fail
-        assert false;
-    }
+//    @Test
+//    public void testFailDemo() {
+//
+//        openUrl("https://google.com");
+//
+//        // ép fail
+//        assert false;
+//    }
 
     // 👇 Allure Step
     @Step("Open URL: {url}")
