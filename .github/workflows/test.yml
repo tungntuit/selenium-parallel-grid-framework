@@ -1,0 +1,47 @@
+name: Run Selenium Tests
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      selenium-hub:
+        image: selenium/hub:4.20.0
+        ports:
+          - 4442-4444:4442-4444
+
+      chrome:
+        image: selenium/node-chrome:4.20.0
+        env:
+          SE_EVENT_BUS_HOST: selenium-hub
+        options: --shm-size=2g
+
+      firefox:
+        image: selenium/node-firefox:4.20.0
+        env:
+          SE_EVENT_BUS_HOST: selenium-hub
+        options: --shm-size=2g
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Build & Test
+        run: mvn clean test
+
+      - name: Upload Allure Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: target/allure-results
